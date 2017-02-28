@@ -1,11 +1,10 @@
 {
     "name": "air-php/http",
-    "version": "0.1",
     "type": "library",
     "description": "A HTTP library.",
     "require": {
         "php": ">=5.4.0",
-        "phpunit/phpunit": "~4.1"
+        "phpunit/phpunit": ">=4.1"
     },
     "autoload": {
         "psr-4": {

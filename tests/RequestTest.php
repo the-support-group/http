@@ -34,6 +34,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             // Cookies
             [
                 'PHPSESSID' => self::COOKIE_VALUE,
+            ],
+            [
+                'userfile' => [
+                    'name' => 'testfile.jpg'
+                ]
             ]
         );
     }
@@ -99,6 +104,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($this->request->getRequestData()));
         $this->assertArrayHasKey('test', $this->request->getRequestData());
         $this->assertEquals('true', $this->request->getRequestData()['test']);
+        $this->assertEquals('true', $this->request->getRequestData('test'));
+        $this->assertEquals('Pizza', $this->request->getRequestData('Burger', 'Pizza'));
+        $this->assertNull($this->request->getRequestData('Burger'));
     }
 
 
@@ -188,5 +196,14 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         // Will return false if the value is not set
         $this->assertFalse($this->request->issetCookie('nonexistent_cookie'));
+    }
+
+
+    /**
+     * Test getFileData().
+     */
+    public function testGetFileData()
+    {
+        $this->assertEquals('testfile.jpg', $this->request->getFileData()['userfile']['name']);
     }
 }

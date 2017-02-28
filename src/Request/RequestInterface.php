@@ -37,7 +37,8 @@ interface RequestInterface
         $method = self::METHOD_GET,
         array $requestData = [],
         array $queryData = [],
-        array $serverData = []
+        array $serverData = [],
+        array $fileData = []
     );
 
 
@@ -60,9 +61,12 @@ interface RequestInterface
 
 
     /**
-     * @return array The request data.
+     * @param mixed $key The data key.
+     * @param mixed $default The value to return if the key is not found.
+     *
+     * @return mixed The request data.
      */
-    public function getRequestData();
+    public function getRequestData($key = null, $default = null);
 
 
     /**
@@ -85,6 +89,14 @@ interface RequestInterface
      * @return string|null The referer or null if not found.
      */
     public function getReferer();
+
+
+    /**
+     * Get file data.
+     *
+     * @return array File data.
+     */
+    public function getFileData();
 
 
     /**
@@ -125,4 +137,12 @@ interface RequestInterface
      * @return boolean
      */
     public function issetCookie($name);
+
+
+    /**
+     * Returns the content of the request.
+     *
+     * @return string
+     */
+    public function getContent();
 }
